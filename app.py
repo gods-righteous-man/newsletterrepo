@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from  models import add_subscribers, get_subscribers, log_newsletter, get_newsletters
 from email_service import send_email_to_subscribers
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def home():
