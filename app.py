@@ -33,7 +33,7 @@ def log_newsletter_route():
     result = log_newsletter(subject , content)
     subscribers = get_subscribers()  # Assuming this fetches all subscribers from the database
     if subscribers:
-        send_email_to_subscribers(subject, content, subscribers)
+        send_email_to_subscribers(subject, content)
     return jsonify(result)
 
 @app.route('/newsletters', methods=['GET'])
