@@ -17,8 +17,8 @@ def get_subscribers():
 
 
 # to save the newsletters 
-def log_newsletter(content: str):
-    newsletters_collection.insert_one({"content": content})
+def log_newsletter(subject: str, content: str,):
+    newsletters_collection.insert_one({"subject": subject, "content": content})
     return {"message": "Newsletter logged successfully."}
 
 # to get all newsletters

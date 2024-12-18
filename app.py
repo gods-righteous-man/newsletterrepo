@@ -27,9 +27,13 @@ def subscribers():
 def log_newsletter_route():
     data = request.get_json()
     content = data.get('content')
+    subject = data.get('subject')
     if not content:
         return jsonify({"error": "Newsletter content is required"}), 400
-    result = log_newsletter(content)
+    result = log_newsletter(subject , content)
+    subscribers = get_subscribers()  # Assuming this fetches all subscribers from the database
+    if subscribers:
+        send_email_to_subscribers(subject, content, subscribers)
     return jsonify(result)
 
 @app.route('/newsletters', methods=['GET'])
