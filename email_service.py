@@ -25,7 +25,7 @@ def send_email_to_subscribers(subject, message):
             msg["Subject"] = subject
 
             # Attach the message body
-            msg.attach(MIMEText(message, "plain"))
+            msg.attach(MIMEText(message, 'plain', 'utf-8'))
 
             # Send the email
             server.sendmail(EMAIL_USER, email, msg.as_string())

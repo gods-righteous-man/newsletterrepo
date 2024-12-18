@@ -48,11 +48,15 @@ def send_emails():
     subject = data.get('subject')
     message = data.get('message')
 
+    print("Subject:", subject)
+    print("Message:", message)
+
     if not subject or not message:
         return {"error": "Subject and message are required."}, 400
 
     result = send_email_to_subscribers(subject, message)
     return result
+
 
 
 
