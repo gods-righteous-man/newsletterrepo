@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from  models import add_subscribers, get_subscribers, log_newsletter, get_newsletters
-from email_service import send_email_to_subscribers
+from email_service import send_email_to_subscribers, send_welcome_email
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -18,9 +18,7 @@ def subscribe():
     if not email:
         return jsonify({"error": "Email is required"}), 400
     result = add_subscribers(email)
-    subject = "Welcome"
-    content = "Thank you for subscribing! This was your first step to achieve greatness!"
-    send_email_to_subscribers(subject, content)
+    send_welcome_email(email)
     return jsonify(result)
 
 @app.route('/subscribers', methods=['GET'])

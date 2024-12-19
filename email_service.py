@@ -34,3 +34,36 @@ def send_email_to_subscribers(subject, message):
         return {"email" : "Email sent successfully to all subscribers"}
     except Exception as e:
         return {"error": str(e)}
+
+
+
+def send_welcome_email(email):
+    message = "Thank you for subscribing! This was your first step to achieve greatness!"
+    subject = "Welcome"
+    if not email:
+        return {"error": "Email not found."}
+
+    #setting up email server
+    try:
+        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+        server.starttls()
+        server.login(EMAIL_USER, EMAIL_PASS)
+
+        #setup email body
+
+        
+        msg = MIMEMultipart()
+        msg["From"] = EMAIL_USER
+        msg["To"] = email
+        msg["Subject"] = subject
+
+        # Attach the message body
+        msg.attach(MIMEText(message, 'plain', 'utf-8'))
+
+        # Send the email
+        server.sendmail(EMAIL_USER, email, msg.as_string())
+        
+        server.quit()
+        return {"email" : "Email sent successfully to all subscribers"}
+    except Exception as e:
+        return {"error": str(e)}
