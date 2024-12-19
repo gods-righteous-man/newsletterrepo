@@ -18,6 +18,9 @@ def subscribe():
     if not email:
         return jsonify({"error": "Email is required"}), 400
     result = add_subscribers(email)
+    subject = "Welcome"
+    content = "Thank you for subscribing! This was your first step to achieve greatness!"
+    send_email_to_subscribers(subject, content)
     return jsonify(result)
 
 @app.route('/subscribers', methods=['GET'])
